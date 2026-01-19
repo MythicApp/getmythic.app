@@ -10,6 +10,7 @@
 import fs from 'fs';
 import fsPromises from 'fs/promises';
 import path from 'path';
+import { getUserFromToken } from '../../utils/auth';
 
 const officialSupportFilePath = path.join(process.cwd(), 'data', 'OfficialSupport.json');
 const officialSupport = JSON.parse(fs.readFileSync(officialSupportFilePath, 'utf8'));
@@ -43,6 +44,17 @@ async function handleSubmit(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  const token = authHeader.substring(7);
+  const user = getUserFromToken(token);
+  if (!user) {
+    return res.status(401).json({ error: 'Invalid token' });
+  }
+
   const { game, engine, notes, rating, ID, submittedAt } = req.body;
 
   if (!game || !engine || !rating || !ID) {
@@ -65,7 +77,8 @@ async function handleSubmit(req, res) {
     notes: notes || '',
     rating,
     ID,
-    submittedAt
+    submittedAt,
+    submittedBy: user.id
   });
 
   await fsPromises.writeFile(submissionsFilePath, JSON.stringify(submissions, null, 2));

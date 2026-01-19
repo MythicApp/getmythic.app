@@ -1,0 +1,23 @@
+[
+  {
+    "id": "4e2259fe-11a3-4fde-9fc7-999d1a929f61",
+    "nickname": "tux",
+    "email": "tux3",
+    "password": "$2b$10$KXVR5Off0HbT7un1p9McuuuVQP2m/C9BZHStE9eLNX/AQjWwSZGsa",
+    "createdAt": "2026-01-19T14:53:44.176Z"
+  },
+  {
+    "id": "f97a6bb0-c8e0-4824-91b7-08c35e426f18",
+    "nickname": "tux",
+    "email": "tux2",
+    "password": "$2b$10$d3DLKK3FGbEVCTx41IR7BeXjMXH1ck9lnGJ66HvSV2P.xY9BVGNCG",
+    "createdAt": "2026-01-19T14:55:05.271Z"
+  },
+  {
+    "id": "cb71d03e-140b-444d-9ca1-d750ccecaba3",
+    "nickname": "tuxnew",
+    "email": "tuxnew@domain.com",
+    "password": "$2b$10$mVr9YK0S9ZI7D3qIOsn81.CKJ8HzisVilFwMNGGPojyzkTTkmSES2",
+    "createdAt": "2026-01-19T15:01:09.731Z"
+  }
+]
