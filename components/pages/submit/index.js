@@ -5,9 +5,10 @@ import Typography from '@/components/common/Typography';
 import Button from '@/components/common/Button';
 import { Section, Stack } from '@/components/common/layout';
 
+const ratingLabels = ['', 'unplayable', 'bad', 'playable', 'good', 'perfect'];
+
 const Form = styled.form`
-  max-width: 600px;
-  margin: 0 auto;
+  width: 75%;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -20,7 +21,7 @@ const InputGroup = styled.div`
 `;
 
 const StyledInput = styled.input`
-  padding: 0.75rem 3rem;
+  padding: 0.75rem 1.5rem;
   border: 1px solid #d1d1d6;
   border-radius: 20px;
   font-size: 1rem;  color: #000;
@@ -32,13 +33,51 @@ const StyledInput = styled.input`
     box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
   }
 `;
+
+const StyledRange = styled.input`
+  -webkit-appearance: none;
+  background: #fff;
+  border: 1px solid #d1d1d6;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 100%;
+  height: 35px;
+
+  &::-webkit-slider-track {
+    background: #ddd;
+    height: 4px;
+    border-radius: 2px;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #007aff;
+    cursor: pointer;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+    transition: box-shadow 0.2s ease;
+  }
+
+  &::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 0 6px rgba(0, 122, 255, 0.2);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #007aff;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+  }
+`;
+
 const StyledTextarea = styled.textarea`
-  padding: 1.5rem 10rem;
+  padding: 1.5rem 1.5rem;
   border: 1px solid #d1d1d6;
   border-radius: 8px;
   font-size: 1rem;  color: #000;
   text-align: left;  transition: border-color 0.2s ease;
-  resize: vertical;
+  resize: horizontal;
   min-height: 100px;
 
   &:focus {
@@ -53,10 +92,36 @@ const Message = styled.p`
   font-weight: 500;
 `;
 
-export default function SubmitPage() {
+const SliderContainer = styled.div`
+  position: relative;
+  margin-top: 1rem;
+`;
+
+const LabelsContainer = styled.div`
+  position: absolute;
+  top: -1.5rem;
+  left: 0;
+  right: 0;
+  padding: 0.5rem 0;
+`;
+
+const LabelBubble = styled.span`
+  position: absolute;
+  left: ${props => ((props.rating - 1) * 25)}%;
+  transform: translateX(-50%);
+  background: #007aff;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+`;
+
+export default function SubmitPage({ nextId }) {
   const [game, setGame] = useState('');
   const [engine, setEngine] = useState('');
   const [notes, setNotes] = useState('');
+  const [rating, setRating] = useState(3);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -71,7 +136,14 @@ export default function SubmitPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ game, engine, notes }),
+        body: JSON.stringify({ 
+          game, 
+          engine, 
+          notes, 
+          rating: ratingLabels[rating], 
+          ID: nextId,
+          submittedAt: new Date().toISOString()
+        }),
       });
 
       const data = await response.json();
@@ -81,6 +153,7 @@ export default function SubmitPage() {
         setGame('');
         setEngine('');
         setNotes('');
+        setRating(3);
       } else {
         setMessage(data.error || 'Submission failed');
       }
@@ -123,6 +196,9 @@ export default function SubmitPage() {
               <label htmlFor="engine">
                 <Typography variant="body">Engine Version</Typography>
               </label>
+              <Typography variant="body" color="tertiary">
+                To get your current engine version, head to Mythics settings and look for "Engine Version" under the "Engine" section.
+              </Typography>
               <StyledInput
                 type="text"
                 id="engine"
@@ -132,6 +208,24 @@ export default function SubmitPage() {
                 pattern="^\d+\.\d+\.\d+$"
                 placeholder="Enter the engine version (e.g. 0.6.0)"
               />
+            </InputGroup>
+            <InputGroup>
+              <label htmlFor="rating">
+                <Typography variant="body">Rating - Please rate the performance of the tested game</Typography>
+              </label>
+              <SliderContainer>
+                <StyledRange
+                  type="range"
+                  id="rating"
+                  min="1"
+                  max="5"
+                  value={rating}
+                  onChange={(e) => setRating(parseInt(e.target.value))}
+                />
+                <LabelsContainer>
+                  <LabelBubble rating={rating}>{ratingLabels[rating]}</LabelBubble>
+                </LabelsContainer>
+              </SliderContainer>
             </InputGroup>
             <InputGroup>
               <label htmlFor="notes">

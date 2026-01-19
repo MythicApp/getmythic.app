@@ -5,6 +5,7 @@
 // The function will return an emtry array if no entry for the requested game was found
 // If this database doesnt have the needed information wether or not a game will run, use the CommunitySupportAPI.
 // The CommunitySupportAPI returns all reviews for a game (written by community and not reviewed by anyone)
+// This API returns all anything ==> Adding arguemts in data file is possible.
 
 import fs from 'fs';
 import fsPromises from 'fs/promises';
@@ -42,10 +43,10 @@ async function handleSubmit(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { game, engine, notes } = req.body;
+  const { game, engine, notes, rating, ID, submittedAt } = req.body;
 
-  if (!game || !engine) {
-    return res.status(400).json({ error: 'Missing game or engine in request body' });
+  if (!game || !engine || !rating || !ID) {
+    return res.status(400).json({ error: 'Missing required fields in request body' });
   }
 
   const submissionsFilePath = path.join(process.cwd(), 'data', 'submissions.json');
@@ -61,8 +62,10 @@ async function handleSubmit(req, res) {
   submissions.push({
     game,
     engine,
-    notes,
-    submittedAt: new Date().toISOString()
+    notes: notes || '',
+    rating,
+    ID,
+    submittedAt
   });
 
   await fsPromises.writeFile(submissionsFilePath, JSON.stringify(submissions, null, 2));

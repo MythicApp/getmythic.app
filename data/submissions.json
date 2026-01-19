@@ -2,13 +2,17 @@
   {
     "game": "Rocket League",
     "engine": "0.6.0",
-    "notes": "The game works great on my M4 Pro",
-    "submittedAt": "2026-01-18T14:42:14.480Z"
+    "notes": "Game runs perfectly on high settings.",
+    "submittedAt": "2026-01-19T10:15:30Z",
+    "rating": "perfect",
+    "ID": 1
   },
   {
-    "game": "Rocket League",
-    "engine": "0.5.0",
-    "notes": "The game works perfectly! I have more than 500 fps!",
-    "submittedAt": "2026-01-18T14:42:37.083Z"
+    "game": "Try 2",
+    "engine": "0.6.0",
+    "notes": "Hopefully it works now",
+    "rating": "good",
+    "ID": 2,
+    "submittedAt": "2026-01-19T14:01:33.630Z"
   }
 ]
