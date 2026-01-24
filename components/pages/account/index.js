@@ -2,7 +2,8 @@ import { useState } from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 import Typography from '@/components/common/Typography';
-import { Section } from '@/components/common/layout';
+import { Section, Stack } from '@/components/common/layout';
+import { Row, Column } from '@/components/common/layout';
 import { Trash2 } from 'react-feather';
 
 const Container = styled.div`
@@ -77,11 +78,17 @@ export default function AccountPage({ submissions: initialSubmissions }) {
 
   return (
     <Container>
-      <Head>
-        <title>Account - My Submissions</title>
-      </Head>
-      <Typography variant="h1">My Account</Typography>
-      <Typography variant="body">Here are all the game compatibility reports you have submitted:</Typography>
+        <Head>
+            <title>Account - My Submissions</title>
+        </Head>
+        <Section contained gutterTop gutterBottom>
+            <Stack gap={2} align="center">
+                <Typography variant="headline" align="center">My Account</Typography>
+                <Typography variant="intro" color="tertiary" align="center">
+                Here are all the game compatibility reports you have submitted:
+                </Typography>
+            </Stack>
+        </Section>
       <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
         <box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', minHeight: '50vh', maxWidth: '1600px', mx: 'auto', px: 4}}>
             <Section>
