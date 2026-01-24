@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const usersFilePath = path.join(process.cwd(), 'data', 'users.json');
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key'; // In production, use env var
+const JWT_SECRET = process.env.JWT_SECRET || 'secret-key-SET-A-PROPER-SECRET-KEY-BEFORE-USE';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -37,7 +37,9 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid credentials' });
     }
 
-    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
+    const token = jwt.sign({ id: user.id, email: user.email, nickname: user.nickname }, JWT_SECRET, { expiresIn: '1d' });
+
+    res.setHeader('Set-Cookie', `token=${token}; HttpOnly; Path=/; Max-Age=86400`);
 
     return res.status(200).json({
       success: true,

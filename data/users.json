@@ -19,5 +19,33 @@
     "email": "tuxnew@domain.com",
     "password": "$2b$10$mVr9YK0S9ZI7D3qIOsn81.CKJ8HzisVilFwMNGGPojyzkTTkmSES2",
     "createdAt": "2026-01-19T15:01:09.731Z"
+  },
+  {
+    "id": "f0c140b9-7ea5-4ed8-9894-01b855081e45",
+    "nickname": "SecretTestAcc",
+    "email": "secret@test.com",
+    "password": "$2b$10$JI/tcGbY5bTjmpHNSm0JmOGh0bhsUykaGmX6fXYQxEqQEVbqj29BS",
+    "createdAt": "2026-01-21T15:38:08.660Z"
+  },
+  {
+    "id": "1f69096c-ffa8-4886-86c5-070ac1f4fe7a",
+    "nickname": "TestForAccountPage",
+    "email": "tuxacc@domain.com",
+    "password": "$2b$10$wDd8L1gYUnaY9y6q/yO89.jXOQs/vbh52ia1xla/zZ12PE71iEg9y",
+    "createdAt": "2026-01-24T11:25:32.034Z"
+  },
+  {
+    "id": "c68fad2a-56bd-4177-9e97-5f2cbca1dd58",
+    "nickname": "idk",
+    "email": "24/01@domain.com",
+    "password": "$2b$10$XhbqBjsuthmVh1AhXDYKAuDoucHvbR0DqlcJrk38N8bfT8RF96f4i",
+    "createdAt": "2026-01-24T12:23:34.555Z"
+  },
+  {
+    "id": "4672e15f-139e-446c-bbe2-91a9d7fbfa82",
+    "nickname": "lofgv.kbcjuhmnfgn",
+    "email": "name@domain.com",
+    "password": "$2b$10$U009IGma/tDx/8tk9F8DiuAjQOoq0NSb3WtITSqDL2i9CGX3fDcZq",
+    "createdAt": "2026-01-24T12:26:08.031Z"
   }
 ]

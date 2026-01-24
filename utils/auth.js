@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+const JWT_SECRET = process.env.JWT_SECRET || 'secret-key-SET-A-PROPER-SECRET-KEY-BEFORE-USE';
 
 export function verifyToken(token) {
   try {

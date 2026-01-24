@@ -5,6 +5,10 @@ import Typography from '@/components/common/Typography';
 import Button from '@/components/common/Button';
 import { Section, Stack } from '@/components/common/layout';
 import Link from 'next/link';
+import { Row, Column } from '@/components/common/layout';
+import next from 'next';
+import { AlignCenter } from 'react-feather';
+
 
 const ratingLabels = ['', 'unplayable', 'bad', 'playable', 'good', 'perfect'];
 
@@ -157,9 +161,11 @@ const AuthForm = ({
   setShowAuth
 }) => (
   <AuthFormContainer>
-    <Typography variant="headline" align="center">
-      {isSignup ? 'Create Account' : 'Login'}
-    </Typography>
+    <stack align="center">
+      <Typography variant="headline" align="center">
+        {isSignup ? 'Create Account' : 'Login'}
+      </Typography>
+    </stack>
     {isSignup && (
       <InputGroup>
         <label htmlFor="authNickname">
@@ -200,7 +206,7 @@ const AuthForm = ({
         required
         placeholder="Enter your password"
       />
-    <Link //Placeholder for password reset, need to program a email reset system
+    <Link //Placeholder for password reset, need to code a email reset system
       href="https://tse3.mm.bing.net/th/id/OIP.9181xDmF1ZYKuJqXSlKqLgHaFN?rs=1&pid=ImgDetMain&o=7&rm=3"
       target="_blank"
       style={{ 
@@ -340,7 +346,14 @@ export default function SubmitPage({ nextId }) {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+      });
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     setIsLoggedIn(false);
@@ -365,24 +378,27 @@ export default function SubmitPage({ nextId }) {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ 
+
+          body: JSON.stringify({ 
           game, 
           engine, 
           notes, 
           rating: ratingLabels[rating], 
           ID: nextId,
-          submittedAt: new Date().toISOString()
+          submittedAt: new Date().toISOString(),
+          user: localStorage.getItem('nickname')
         }),
-      });
+      })
 
       const data = await response.json();
 
       if (response.ok) {
-        setMessage('Submission successful!');
+        setMessage('Submission successful! Thanks for contributing to Mythic!');
         setGame('');
         setEngine('');
         setNotes('');
         setRating(3);
+        //ToDo: Make a "Thanks for submitting" page
       } else {
         setMessage(data.error || 'Submission failed');
       }
@@ -401,20 +417,27 @@ export default function SubmitPage({ nextId }) {
       </Head>
       <Section contained gutterTop gutterBottom>
         <Stack gap={3} align="center">
-          <Typography variant="headline" align="center">
-            Submit Game Compatibility
-          </Typography>
-          <Typography variant="intro" color="tertiary" align="center">
-            Help us improve Mythic by submitting new games to our compatability list.
-          </Typography>
+          <Row align="center" style={{ position: 'relative', zIndex: 1 }}>
+            <Typography variant="headline" align="center">
+              Submit game compatibility report
+            </Typography>
+            <Typography variant="intro" color="tertiary" align="center">
+              Help us improve Mythic by submitting new games to our compatability list.
+            </Typography>
+          </Row>
           {isLoggedIn ? (
             <>
-              <Typography variant="body" align="center">
-                Logged in as {user.nickname} ({user.email})
-                <Button onClick={handleLogout} size="sm" style={{ marginLeft: '1rem' }}>
-                  Logout
-                </Button>
-              </Typography>
+              <Row align="center" style={{position: 'relative', zIndex: 1}}>
+                <Typography variant="body" align="center">
+                  Logged in as {user.nickname} (<i>{user.email}</i>)
+                  <Button onClick={handleLogout} size="sm" style={{ marginLeft: '1rem' }}>
+                    Logout
+                  </Button>
+                  <Button onClick={() => { window.location.href = 'account'; }} size="sm" style={{ marginLeft: '1rem' }}>
+                    My Account 
+                  </Button>
+                </Typography>
+              </Row>
               <Form onSubmit={handleSubmit}>
                 <InputGroup>
                   <label htmlFor="game">
@@ -472,8 +495,9 @@ export default function SubmitPage({ nextId }) {
                     id="notes"
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    placeholder="Enter any notes about the game's performance (optional)"
+                    placeholder={"Please add notes about the performance of the tested game. Please include details about your Mac model and your fps ingame"}
                     rows="4"
+                    required
                   />
                 </InputGroup>
                 <Button type="submit" size="lg" disabled={loading} style={{ alignSelf: 'center' }}>
