@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Button = styled.a`
+const StyledElement = styled.button`
   cursor: ${({ disabled }) => disabled ? `default` : `pointer`};
   display: inline-flex;
   align-items: center;
@@ -48,5 +48,10 @@ const Button = styled.a`
     margin: 0 -0.25em;
   }
 `;
+
+const Button = ({ href, ...props }) => {
+  const Component = href ? 'a' : 'button';
+  return <StyledElement as={Component} href={href} {...props} />;
+};
 
 export default Button;
