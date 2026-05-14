@@ -236,14 +236,17 @@ const FeaturesSection = () => {
               </Typography>
             </Stack>
             <div className="feature-media">
-              <iframe
-                src={`https://discord.com/widget?id=1154998702650425397&theme=${colorScheme}`}
-                width="100%"
-                height="224px"
-                allowTransparency="true"
-                frameBorder="0"
-                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
-              </iframe>
+              <div style={{ width: '100%', borderRadius: 8, overflow: 'hidden', transform: 'translateZ(0)', WebkitMaskImage: 'radial-gradient(white, white)' }}>
+                <iframe
+                  src={`https://discord.com/widget?id=1154998702650425397&theme=${colorScheme}`}
+                  width="100%"
+                  height="224px"
+                  style={{ border: 0, background: 'transparent', display: 'block' }}
+                  allowTransparency="true"
+                  frameBorder="0"
+                  sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+                </iframe>
+              </div>
             </div>
           </FeatureSplitStack>
         </GridItem>
