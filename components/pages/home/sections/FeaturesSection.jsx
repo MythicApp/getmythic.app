@@ -99,7 +99,7 @@ const FeaturesSection = () => {
         <GridItem as={Tile} height={{ lg: 2 }} width={{ lg: 2, xl: 1 }}>
           <FeatureSplitStack direction={{ xs: 'vertical', md: 'vertical', lg: 'horizontal', xl: 'vertical' }} gap={2}>
             <Stack className="feature-copy" direction='vertical' gap={2}>
-              <Typography variant="eyebrow">Import <HighlightedText>everything</HighlightedText>.</Typography>
+              <Typography variant="eyebrow">Import <HighlightedText>everything.</HighlightedText></Typography>
               <Typography variant="body">
                 Import games from existing launchers and local installations in mere minutes.
                 <br />
