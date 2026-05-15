@@ -104,7 +104,7 @@ const FeaturesSection = () => {
                 Import games from existing launchers and local installations in mere minutes.
                 <br />
                 <br />
-                Mythic will automatically organise, and prepare them for launching — no assembly required.
+                Mythic will automatically organise and prepare them for launching — no assembly required.
               </Typography>
             </Stack>
             <div className="feature-media">
@@ -145,7 +145,7 @@ const FeaturesSection = () => {
             <Stack className="feature-copy" direction='vertical' gap={2}>
               <Typography variant="eyebrow"><HighlightedText>Powerful</HighlightedText> game controls.</Typography>
               <Typography variant="body">
-                Mythic minimises time wasted fiddling with techy settings, and terminal hacks.
+                Mythic minimises time wasted fiddling with techy settings and terminal hacks.
                 <br />
                 <br />
                 The intuitive game settings view lets you tweak launch arguments, verify file integrity, and more with just a few clicks.
@@ -211,7 +211,7 @@ const FeaturesSection = () => {
             <Stack className="feature-copy" direction='vertical' gap={2}>
               <Typography variant="eyebrow">It just works!</Typography>
               <Typography variant="body">
-                Mythic&apos;s onboarding experience guides your through setting up the application, swiftly.
+                Mythic&apos;s onboarding experience guides you through setting up the application swiftly.
               </Typography>
             </Stack>
             <div className="feature-media">

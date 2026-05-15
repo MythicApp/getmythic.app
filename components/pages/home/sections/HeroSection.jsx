@@ -39,7 +39,7 @@ const HeroSection = ({ versionNumber, minimumSystemVersion }) => {
                     The <HighlightedText>elegant</HighlightedText> way to play Windows® games on Mac.
                   </Typography>
                   <Typography variant="intro-elevated" color="tertiary" gutterBottom>
-                    An open-source macOS game launcher with the ability to play Windows® games through a custom implementation of Apple&apos;s Game Porting Toolkit, with support for multiple storefronts.
+                    An open-source macOS game launcher with the ability to play Windows® games through a custom implementation of Apple&apos;s Game Porting Toolkit and support for multiple storefronts.
                   </Typography>
                   <Button size="lg" onClick={() => router.push("/download")}>Download</Button>
                   <Typography variant="body-reduced" color="tertiary">{ versionNumber } | macOS {minimumSystemVersion ? `${minimumSystemVersion.split(".")[0]}+` : ``}</Typography>
