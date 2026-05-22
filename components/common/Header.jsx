@@ -37,10 +37,7 @@ const IslandNav = styled.nav`
   z-index: 9998;
   pointer-events: none;
   background: none;
-  transition: opacity 0.4s cubic-bezier(0.28, 0.11, 0.32, 1);
-  opacity: 1;
   &.hidden {
-    opacity: 0;
     pointer-events: none;
   }
 `;
@@ -55,6 +52,18 @@ const Wrapper = styled.div`
   background-color: var(--material-background-color);
   backdrop-filter: var(--material-filters);
   transition: background-color 0.5s cubic-bezier(0.28, 0.11, 0.32, 1), max-width 0.5s cubic-bezier(0.28, 0.11, 0.32, 1), border-radius 0.5s cubic-bezier(0.28, 0.11, 0.32, 1), box-shadow 0.5s cubic-bezier(0.28, 0.11, 0.32, 1);
+  
+  &.island {
+    opacity: 1;
+    transition: background-color 0.5s cubic-bezier(0.28, 0.11, 0.32, 1), opacity 0.5s cubic-bezier(0.28, 0.11, 0.32, 1), max-width 0.5s cubic-bezier(0.28, 0.11, 0.32, 1), border-radius 0.5s cubic-bezier(0.28, 0.11, 0.32, 1), box-shadow 0.5s cubic-bezier(0.28, 0.11, 0.32, 1);
+  }
+  
+  ${IslandNav}.hidden & {
+    &.island {
+      opacity: 0.01;
+    }
+  }
+  
   .menu-open & {
     background-color: var(--thick-material-background-color);
   }
