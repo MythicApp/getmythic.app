@@ -9,6 +9,7 @@ import config from '@/data/config';
 const DiscordIcon = styled(DiscordSvg)`
   width: 48px;
   height: 48px;
+  fill: currentColor;
 `
 const GitHubIcon = styled(GitHubSvg)`
   width: 48px;
