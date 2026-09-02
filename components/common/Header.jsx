@@ -564,14 +564,15 @@ function Header() {
       <Nav role="navigation" className={isOpen ? "menu-open" : ""} ref={navRef}>
         {navContent}
       </Nav>
-      <IslandNav
-        role="navigation"
-        className={`${isOpen ? "menu-open" : ""} ${showIsland ? '' : 'hidden'}`}
-        ref={islandRef}
-        aria-hidden={!showIsland}
-      >
-        {islandContent}
-      </IslandNav>
+      {showIsland && (
+        <IslandNav
+          role="navigation"
+          className={isOpen ? "menu-open" : ""}
+          ref={islandRef}
+        >
+          {islandContent}
+        </IslandNav>
+      )}
     </>
   );
 }
