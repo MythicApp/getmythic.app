@@ -78,11 +78,18 @@ const sendInEmail = (name, url) => {
 };
 
 const Release = ({ release, latest, downloadUrl }) => {
-  const zipAsset = release.assets?.find((asset) => asset.name?.endsWith('.zip')) ?? null;
-  const githubDownloadUrl = zipAsset?.browser_download_url ?? null;
-  const primaryDownloadUrl = downloadUrl ?? githubDownloadUrl;
+  const githubDownloadUrl = release.assets?.find((asset) => asset.browser_download_url)?.browser_download_url ?? null;
+  const githubArchiveUrl = release.tag_name
+    ? `https://github.com/MythicApp/Mythic/archive/refs/tags/${encodeURIComponent(
+        release.tag_name
+      )}.zip`
+    : null;
+  const primaryDownloadUrl = downloadUrl ?? githubDownloadUrl ?? githubArchiveUrl;
   const hasGithubFallback = Boolean(downloadUrl && githubDownloadUrl && downloadUrl !== githubDownloadUrl);
   const isGithubPrimary = !downloadUrl && !!githubDownloadUrl;
+  const isGithubArchiveFallback = !downloadUrl && !githubDownloadUrl && !!githubArchiveUrl;
+  const showGithubIcon = isGithubPrimary || isGithubArchiveFallback;
+  const downloadButtonLabel = 'Download';
 
   const releaseUrl = `${release.html_url ?? ''}#${release.name}`;
 
@@ -119,8 +126,8 @@ const Release = ({ release, latest, downloadUrl }) => {
                     <Stack direction="horizontal" align="center" gap={1}>
                       {primaryDownloadUrl ? (
                         <Button href={primaryDownloadUrl}>
-                          {isGithubPrimary && <GithubSvg style={{ marginRight: 8, width: 18, height: 18, verticalAlign: 'middle' }} />}
-                          Download
+                          {showGithubIcon && <GithubSvg style={{ marginRight: 8, width: 18, height: 18, verticalAlign: 'middle' }} />}
+                          {downloadButtonLabel}
                         </Button>
                       ) : null}
                       {hasGithubFallback ? (
