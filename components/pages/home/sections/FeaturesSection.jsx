@@ -63,8 +63,8 @@ const FeatureSplitStack = styled(Stack)`
 const FeaturesSection = () => {
   const { colorScheme = "light" } = useSite();
   return (
-    <Section contained="lg" gutterBottom>
-      <Stack style={{ textAlign: 'center', marginBottom: 48 }}>
+    <Section className="section--emphasized" contained="lg" gutterBottom>
+      <Stack style={{ textAlign: 'center', paddingBlock: 48 }}>
         <Typography variant="headline">Friends gaming without you?</Typography>
         <br />
         <Typography variant="headline">

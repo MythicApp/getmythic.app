@@ -120,6 +120,23 @@ html[data-color-scheme='dark'] {
   color-scheme: dark;
 }
 
+[data-color-scheme='dark'] section.section--emphasized {
+  background: linear-gradient(
+    to bottom,
+    var(--fill-gray-secondary-alt) 100%,
+    var(--dark) 0%
+  );
+  min-height: calc(100vh - 473px);
+}
+
+[data-color-scheme='light'] section.section--emphasized {
+  background: linear-gradient(
+    to bottom,
+    var(--fill-tertiary-alt) 100%,
+    var(--light) 0%
+  );
+}
+
 html.color-scheme-transition,
 html.color-scheme-transition *,
 html.color-scheme-transition *::before,
@@ -407,15 +424,6 @@ html.color-scheme-transition *::after {
 
 #__next {
   display: contents;
-}
-
-main {
-  background: linear-gradient(
-    to bottom,
-    var(--dark) 0%,
-    var(--fill-gray-secondary-alt) 100%
-  );
-  min-height: calc(100vh - 473px);
 }
 
 @media only screen and (max-width: 1024px) {
