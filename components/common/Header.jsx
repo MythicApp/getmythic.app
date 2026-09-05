@@ -31,7 +31,7 @@ const Nav = styled.nav`
 
 const IslandNav = styled.nav`
   position: sticky;
-  top: 16px;
+  top: 10px;
   left: 0;
   width: 100%;
   z-index: 9998;
