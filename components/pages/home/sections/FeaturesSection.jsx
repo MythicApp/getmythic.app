@@ -71,7 +71,7 @@ const FeaturesSection = () => {
           <HighlightedText>Mythic fixes that.</HighlightedText>
         </Typography>
       </Stack>
-      <Grid columns={{ lg: 2, xl: 3 }} gap>
+      <Grid className="tile--hover" columns={{ lg: 2, xl: 3 }} gap>
         <GridItem as={Tile} width={{ lg: 2 }}>
           <FeatureSplitStack direction={{ md: 'vertical', lg: 'horizontal' }} gap={2}>
             <Stack className="feature-copy" direction='vertical' gap={2}>
@@ -86,7 +86,6 @@ const FeaturesSection = () => {
             <div className="feature-media">
               <Image
                 key={colorScheme}
-                className="feature-image-hover"
                 width={481}
                 height={282}
                 src={`/mythic-library-grid-${colorScheme}.avif`}
